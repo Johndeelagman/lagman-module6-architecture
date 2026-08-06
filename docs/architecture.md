@@ -29,14 +29,26 @@ update, and delete the system's records. The data layer will use **MongoDB Atlas
 | Repository | GitHub | Stores documentation and tracks changes |
 ## 5. System Architecture Diagram
 ```mermaid
-flowchart TD
-U[User] --> F[Vue.js Frontend]
-F -->|HTTP Request| B[Node.js and Express Backend]
-B -->|Database Operation| D[(MongoDB Atlas Free)]
-D -->|Query Result| B
-B -->|JSON Response| F
-F -->|Display Result| U
-```
+graph TD
+    subgraph Presentation_Layer [Presentation Layer]
+        A[Vue.js Frontend Interface]
+    end
+
+    subgraph Application_Layer [Application Layer]
+        B[Node.js / Express API Server]
+        C[Authentication & Business Logic]
+    end
+
+    subgraph Data_Layer [Data Layer]
+        D[(MongoDB Atlas Database)]
+    end
+
+    A -->|HTTPS / REST API Requests| B
+    B --> C
+    C -->|Database Queries| D
+    D -->|Data Responses| C
+    C -->|JSON Responses| A
+```    
 ## 6. Data Flow
 ### Example Process: Create a New Record
 1. The user enters information through the Vue.js interface.
