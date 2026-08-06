@@ -37,31 +37,6 @@ D -->|Query Result| B
 B -->|JSON Response| F
 F -->|Display Result| U
 ```
-# Architectural Documentation
-
-## System Architecture Diagram
-
-```mermaid
-graph TD
-    subgraph Presentation_Layer [Presentation Layer]
-        A[Vue.js Frontend Interface]
-    end
-
-    subgraph Application_Layer [Application Layer]
-        B[Node.js / Express API Server]
-        C[Authentication & Business Logic]
-    end
-
-    subgraph Data_Layer [Data Layer]
-        D[(MongoDB Atlas Database)]
-    end
-
-    A -->|HTTPS / REST API Requests| B
-    B --> C
-    C -->|Database Queries| D
-    D -->|Data Responses| C
-    C -->|JSON Responses| A
-    
 ## 6. Data Flow
 ### Example Process: Create a New Record
 1. The user enters information through the Vue.js interface.
